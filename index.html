@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GA4 Learning Site</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f8ff;
+      color: #222;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #4f46e5;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav {
+      margin: 20px;
+      text-align: center;
+    }
+    nav a {
+      text-decoration: none;
+      color: #4f46e5;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 15px;
+      background: #4f46e5;
+      color: white;
+      transition: 0.2s;
+    }
+    button:hover {
+      background: #3730a3;
+    }
+
+    form {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+      justify-content: center;
+    }
+    input[type="text"] {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      margin-top: 30px;
+      font-size: 14px;
+      background: #f0f0f0;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>GA4 Learning Playground</h1>
+    <p>Interact with this page and watch your actions appear in Google Analytics</p>
+  </header>
+
+  <nav>
+    <a href="#home" onclick="sendEvent('navigation', {page: 'Home'})">Home</a>
+    <a href="#about" onclick="sendEvent('navigation', {page: 'About'})">About</a>
+    <a href="#contact" onclick="sendEvent('navigation', {page: 'Contact'})">Contact</a>
+  </nav>
+
+  <main>
+    <h2>Try Some Actions 🚀</h2>
+    <div style="text-align:center;">
+      <button onclick="sendEvent('sign_up', {method: 'Email'})">Sign Up</button>
+      <button onclick="sendEvent('purchase', {value: 50, currency: 'USD'})">Buy Now ($50)</button>
+      <button onclick="sendEvent('click_cta', {label: 'Learn More'})">Learn More</button>
+    </div>
+
+    <hr style="margin:30px 0;">
+
+    <h2>Feedback Form</h2>
+    <form onsubmit="sendEvent('form_submit', {form: 'Feedback'}); return false;">
+      <input type="text" placeholder="Your feedback" required>
+      <button type="submit">Submit</button>
+    </form>
+  </main>
+
+  <footer>
+    GA4 Learning Template — Play around, then check your <strong>Realtime report</strong> in Google Analytics.
+  </footer>
+
+  <!-- GA4 Script -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    // Replace with YOUR Measurement ID
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX'); // <-- put your GA4 Measurement ID here
+
+    // Helper to send custom events
+    function sendEvent(name, params) {
+      gtag('event', name, params);
+      console.log("Event sent:", name, params);
+    }
+  </script>
+</body>
+</html>
